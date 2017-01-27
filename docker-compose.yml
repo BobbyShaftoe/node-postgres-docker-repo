@@ -1,0 +1,19 @@
+version: '2.0'
+
+services:
+  nodejs_demo:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=db
+    depends_on:
+      - db
+    links:
+      - "db:db"
+  db:
+    image: "postgres:latest"
+    environment:
+      - POSTGRES_DB=todo
+    volumes:
+      - /var/lib/postgresql
